@@ -38,10 +38,10 @@ connection.on('ready', function () {
         q.bind(exchange, routing_key);
 
         // Receive messages
-        q.subscribe(function (message) {
+        q.subscribe(function (message, headers) {
             // Print messages to stdout
-            console.log(message);
-            console.log('message data: ', String(message.data));
+            console.log('message body: ', message);
+            console.log('message header: ', headers);
         });
     });
 });
