@@ -30,6 +30,7 @@ connection.on('ready', function () {
         q.subscribe(function (message) {
             // Print messages to stdout
             console.log(message);
+            console.log(String(message.data));
         });
     });
 });
