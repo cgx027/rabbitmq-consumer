@@ -23,9 +23,9 @@ connection.on('error', function(e) {
 // Wait for connection to become established.
 connection.on('ready', function () {
     // Use the default 'amq.topic' exchange
-    connection.queue(exchange_name, queue_name, function (q) {
+    connection.queue(queue_name, function (q) {
         // Catch all messages
-        q.bind(routing_key);
+        q.bind(exchange_name, routing_key);
 
         // Receive messages
         q.subscribe(function (message) {
