@@ -1,7 +1,8 @@
 var amqp = require('amqp');
 
-var routing_key = 'on.events';
-var queue_name = routing_key + '.test.consumer';
+var exchange_name = 'on.events';
+var routing_key = 'node.alert.*';
+var queue_name = exchange_name + '-' + routing_key + '-test.consumer';
 var options = {
     url: "amqp://localhost"
 };
@@ -22,7 +23,7 @@ connection.on('error', function(e) {
 // Wait for connection to become established.
 connection.on('ready', function () {
     // Use the default 'amq.topic' exchange
-    connection.queue(queue_name, function (q) {
+    connection.queue(exchange_name, queue_name, function (q) {
         // Catch all messages
         q.bind(routing_key);
 
